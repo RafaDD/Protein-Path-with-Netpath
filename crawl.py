@@ -17,9 +17,6 @@ options.add_experimental_option('excludeSwitches', ['enable-logging'])
 driver = webdriver.Edge(options=options)
 name_index = {}
 protein = {}
-driver.get(f'https://www.baidu.com/')
-page_source_n = driver.page_source
-print(page_source_n)
 
 for n in trange(args.start, args.start+args.step, ncols=60):
     if n % 50 == 0:
