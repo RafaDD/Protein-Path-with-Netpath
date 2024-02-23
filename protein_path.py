@@ -45,26 +45,21 @@ class protein_path:
             return None
 
         p1 = self.name_index[p1]
-        f1 = False
-        if isinstance(p1, list):
-            f1 = True
+        if not isinstance(p1, list):
+            p1 = [p1]
         p2 = self.name_index[p2]
-        f2 = False
-        if isinstance(p2, list):
-            f2 = True
+        if not isinstance(p2, list):
+            p2 = [p2]
 
 
         visited = set()
         prev = {}
-        if f1:
-            queue = p1.copy()
-            for p in p1:
-                prev[p] = p
-                visited.add(p)
-        else:
-            queue = [p1]
-            prev[p1] = p1
-            visited.add(p1)
+
+        queue = p1.copy()
+        for p in p1:
+            prev[p] = p
+            visited.add(p)
+
         end = False
         end_place = None
         
@@ -79,16 +74,10 @@ class protein_path:
                     visited.add(p)
                     prev[p] = p_current
                     queue.append(p)
-                    if f2:
-                        if p in p2:
-                            end = True
-                            end_place = p
-                            break
-                    else:
-                        if p == p2:
-                            end = True
-                            end_place = p
-                            break 
+                    if p in p2:
+                        end = True
+                        end_place = p
+                        break
             except:
                 pass
             
