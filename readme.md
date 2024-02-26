@@ -37,7 +37,7 @@ python crawl.py --start $start_protein_id --step $number_of_ids
 Note that NetPath have lots of blank ids.
 
 ### Usage
-We have collected part of the data from NetPath, around 2000 proteins and their path to other proteins. Use the following command to run. If you are using GUI, then refer to Introduction instead.
+We have collected part of the data from NetPath, around 2000 proteins and their path to other proteins. Use the following command to run. If you are using GUI, then refer to Demo instead.
 
 ```bash
 python run.py
