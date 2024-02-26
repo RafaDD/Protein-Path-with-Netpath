@@ -1,5 +1,17 @@
 ## Fetching protein path
 
+### Demo
+
+Here's a GUI demo of this protein path finder project.
+
+![demo](./demo.gif)
+
+You may use
+```bash
+python demo.py
+```
+to open up your own GUI demo at http://127.0.0.1:7860 locally. Make sure you have ```gradio``` package installed.
+
 ### Introduction
 As is known, proteins interact with each other intracellularly, which has led to a series of studies focusing on revealing the relationships between different proteins. Moreover, when we learn about a specific pathway or function centered on one specific protein, we need to get a general idea of other related proteins and pathways to help us better understand what we are doing or even pop up with new ideas that we can work on.
 
@@ -25,10 +37,10 @@ python crawl.py --start $start_protein_id --step $number_of_ids
 Note that NetPath have lots of blank ids.
 
 ### Usage
-We have collected part of the data from NetPath, around 2000 proteins and their path to other proteins. Use the following command to run.
+We have collected part of the data from NetPath, around 2000 proteins and their path to other proteins. Use the following command to run. If you are using GUI, then refer to Introduction instead.
 
 ```bash
-python demo.py
+python run.py
 ```
 
 Input two proteins of your interest, then a shortest interaction pathway of these two proteins will be returned as a result.
