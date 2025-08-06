@@ -43,19 +43,25 @@ We have collected part of the data from NetPath, around 2000 proteins(as shown i
 python run.py
 ```
 
-Input two proteins of your interest, then a shortest interaction pathway of these two proteins will be returned as a result.
+Input two proteins of your interest, then the shortest interaction pathways of these two proteins will be returned as a result. It can also generate a image showing the pathways.
 
 _Example 1:_
 ```
 Protein1 : mapk10
 Protein2 : rab5
 Path:
-MAPK10 -> MADD -> TNFRSF1A -> TNF -> TRADD -> AKT1 -> APPL1 -> RAB5
+MAPK10 -> MADD -> TNFRSF1A -> TNF -> CHUK -> AKT1 -> APPL1 -> RAB5
+MAPK10 -> MADD -> TNFRSF1A -> TNF -> IKBKB -> AKT1 -> APPL1 -> RAB5
+MAPK10 -> MADD -> TNFRSF1A -> TNF -> IKBKG -> AKT1 -> APPL1 -> RAB5
 ```
+![](./imgs/MAPK10->RAB5.png)
+
 _Example 2:_
 ```
 Protein1 : casp1 
 Protein2 : rab5
 Path:
 CASP1 -> EGFR -> EPS8 -> USP6NL -> RAB5
+CASP1 -> SHC1 -> EPS8 -> USP6NL -> RAB5
 ```
+![](./imgs/CASP1->RAB5.png)

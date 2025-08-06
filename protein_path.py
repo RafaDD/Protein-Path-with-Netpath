@@ -37,12 +37,14 @@ class protein_path:
         NAME_1 = p1
         NAME_2 = p2
 
+        dist = {NAME_1: 0}
+
         if p1 not in self.name_index.keys():
             print(f'{p1} is not included in our dataset.')
-            return None
+            return []
         if p2 not in self.name_index.keys():
             print(f'{p2} is not included in our dataset.')
-            return None
+            return []
 
         p1 = self.name_index[p1]
         if not isinstance(p1, list):
@@ -51,55 +53,57 @@ class protein_path:
         if not isinstance(p2, list):
             p2 = [p2]
 
-
-        visited = set()
-        prev = {}
-
         queue = p1.copy()
-        for p in p1:
-            prev[p] = p
-            visited.add(p)
 
         end = False
-        end_place = None
         
         while len(queue) > 0:
             p_current = queue[0]
+            name_current = self.name_index[p_current]
             queue.pop(0)
             
             try:
                 for p in self.protein[p_current]:
-                    if p in visited:
-                        continue
-                    visited.add(p)
-                    prev[p] = p_current
-                    queue.append(p)
-                    if p in p2:
-                        end = True
-                        end_place = p
-                        break
+                    name_neighbour = self.name_index[p]
+                    if name_neighbour not in dist.keys():
+                        dist[name_neighbour] = dist[name_current] + 1
+                        queue.append(p)
+
             except:
                 pass
             
-            if end:
-                break
         
-        if not end:
-            print(f'Find no path from {NAME_1} to {NAME_2}')
-            return None
+        # if not end:
+        #     print(f'Find no path from {NAME_1} to {NAME_2}')
+        #     return None
         
-        path = []
-        p = end_place
-        while prev[p] != p:
-            path.append(p)
-            p = prev[p]
-        path.append(p)
-        
-        path.reverse()
-        for i in range(len(path)):
-            path[i] = self.name_index[path[i]]
-        return path
+        paths = []
+        p1 = self.name_index[NAME_1][0]
+        p2 = self.name_index[NAME_2][0]
+        self.collect_paths(p1, p2, dist, [], paths)
+
+        unique_paths = list(dict.fromkeys(tuple(row) for row in paths))
+        unique_paths = [list(row) for row in unique_paths]
+
+        return unique_paths
     
+
+    def collect_paths(self, current, end, dist, path, paths):
+        name_current = self.name_index[current]
+        path.append(name_current)
+        if current == end:
+            paths.append(path[:])
+        elif current in self.protein.keys():
+            for p in self.protein[current]:
+                try:
+                    name_next = self.name_index[p]
+                    if name_next in dist.keys() and dist[name_next] == dist[name_current] + 1:
+                        self.collect_paths(p, end, dist, path, paths)
+                except:
+                    continue
+        path.pop()
+
+
     def find_shortest(self):
         p1 = input('Protein1 : ')
         p2 = input('Protein2 : ')
